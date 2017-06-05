@@ -1,38 +1,24 @@
-# ECIP
+The Official Ethereum Classic Improvement Process Project
+==========================================================
 
-[![Join the chat at https://gitter.im/ethereumproject/ECIPs](https://badges.gitter.im/ethereumproject/ECIPs.svg)](https://gitter.im/ethereumproject/ECIPs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+We collect specifications for APIs, file formats, protocols and workflows from all parties that collaborate on Ethereum Classic. This project enables harmony between multiple collaborating parties and is driven by _*rough consensus through working code*_.
 
-Ethereum Classic Improvement Proposals (ECIPs), are technical write-ups that describe suggested changes to the Ethereum Protocol. Finalized proposals agreed up by volunteer client developers, and the users of the Ethereum Classic main net blockchain are implemented by Ethereum Classic client developers.
+You can start contributing by sending a pull request to https://github.com/ethereumproject/ecips on GitHub.
 
-Every pull request will be reviewed and discussed by volunteer Ethereum Classic client developers and any developers on Github willing to contribute their well reasoned opinions. Regardless if there is general agreement you are able to use the information generated from the discussion to create a a second draft. This can be done by either updating the pull request or submitting a new pull request. This process can be repeated (See figure 1) until the volunteer developer community agrees to add the pull request.
+Please read [ecip.ethereumclassic.org](http://ecip.ethereumclassic.org/) for the rendered content.
 
-![Figure 1: The cyclic process of proposal and review](./process.png "Figure 1: The process of proposal and review")
+## Guidelines
 
-Having an ECIP within the folder of the repository does not make it a formally accepted standard until its status becomes Active. For a ECIP to become Active requires the mutual consent of the community. Those proposing changes should consider that ultimately consent may rest with the consensus of the Ethereum users.
+* A specification SHOULD be created and modified by pull requests according to [1/C4](1/README.md)
+* A Specification's lifecycle SHOULD follow the lifecycle defined in [2/COSS](2/README.md)
+* A Specification SHOULD use the CC0 license
+* A Specification SHOULD use [RFC 2119](http://tools.ietf.org/html/rfc2119) key words.
+* Non-cosmetic changes are allowed only on Raw and Draft specifications.
 
-ECIPs grew out of the now hard-forked Ethereum DAO hard-fork (or ETF) repository, the are currently no other differences between Ethereum Classic/original main net and and Ethereum DAO hard-forked besides the DAO hard-fork but future changes may be added like early defusal of the difficulty bomb.
+## C4 and COSS are derived from [Unprotocols.org](https://unprotocols.org)
 
-# Network split
-
-Pushing changes to the protocol without consensus will cause a network split. The ECIP process should not be skipped, as previously done by Ethereum Foundation developers unilaterally implementing a rushed hard-fork in the most widely used client creating a network split at block 1920000.
-
-The Ethereum Foundation raised money from the community to work towards the "mission to promote and support research, development and education to bring decentralized protocols", and failed when shortly after the DAO exploit was used Vitalik Buterin announced using the Ethereum Foundation blog that a they had already unilaterally decided on forking. A [chat log](http://pastebin.com/raw/aMKwQcHR) from an internal chat reveals this decision was made prior to the announcement, and comments like "default behavior of Geth to be pro-fork as per internal discussions" found in DAO hard-fork [pull requests](https://github.com/ethereum/go-ethereum/pull/2814) and the unwillingness to use their own proposal system show the narrative that the Ethereum Foundation followed the will of the community is clearly wrong. What the Ethereum foundation did the opposite of decentralized decision making. 
-
-Decentralized decision making is part of the defense in depth security that protects the integrity of the Ethereum blockchain. It is critical for keeping the promise of "applications that run exactly as programmed without any possibility of downtime, censorship, fraud or third party interference."
-
-# Getting started contributing
-The [ECIP sample](./ECIP-0000.md.sample) is the best place to start. The sample was updated for Ethereum use by Martin Becze, it was predominantly derived from the Bitcoin improvement proposal based on the Python improvement proposal system. Fork the repository and add your ECIP to it, using the provided [ECIP markdown template](ECIP-0000.md.template). Submit by creating a Pull Request to the Ethereum Classic [ECIPs repository](https://github.com/ethereumproject/ECIPs).
-
-# Current ECIPs
-| Number        |Title         | Author | Type  | Layer        | Status / Discussion |
-| ------------- | ------------ | ------ | ----- | -------------| ------------------- |
-| [1](ECIPs/EIP-1001.mediawiki)    | Homestead Hard-fork Changes | Vitalik Buterin | Standard | Homestead (hard-fork) | Accepted |
-| [2](ECIPs/EIP-1002.mediawiki)    | Addition of CALLDEPTH opcode | Martin Holst Swende | Standard | Consensus (hard-fork) | [Draft](https://github.com/ethereum/EIPs/issues/25) |
-| [3](ECIPs/EIP-1003.mediawiki)    | EIP Classification | Joseph Chow | Meta | | Draft |
-| [4](ECIPs/EIP-1004.md)    | Gas Usage for `RETURN` and `CALL*` | Christian Reitwiessner | Standard | Consensus (hard-fork) | [Draft](https://github.com/ethereum/EIPs/issues/8) |
-| [5](ECIPs/EIP-1005.md)    | Renaming Suicide Variable | Hudson Jameson | Meta |  | [Draft](https://github.com/ethereum/EIPs/pull/42) |
-| [6](ECIPs/EIP-1006.md)    | DELEGATECALL | Vitalik Buterin | Standard | homestead (hard-fork) | [Accepted](https://github.com/ethereum/EIPs/issues/23) |
-| [7](ECIPs/EIP-1007.md)    | devp2p Forward Compatibility Requirements for Homestead | Felix Lange | Standard | Networking | [Accepted](https://github.com/ethereum/EIPs/pull/49) |
-| [8](ECIPs/EIP-1008.md)    | Serenity Currency and Crypto Abstraction | Vitalik Buterin | Standard | Serenity feature | Draft |
-| [9](ECIPs/EIP-1009.md)    | Ethereum Domain Name Service - Specification | Nick Johnson | Standard | Informational | Draft |
-| [10](ECIPs/ECIP-1010.md)    | Delay Difficulty Bomb Explosion | Igor Artamonov | Standard | Consensus (hard-fork) | [Accepted](https://github.com/ethereumproject/ECIPs/issues/4) |
+* As [1/C4](1/C4) and [2/COSS](2/COSS) are empirical processes evolved by many communities of programmers, changes to these specifications must first be listed as an issue on the upstream git [repository](https://github.com/unprotocols/rfc). Discussion will take place there, not here.
+* We will then adopt the stable of C4 and COSS specifications on said repository.
+* This is equivalent to the Scientific process, which attempts to weed out inaccuracy, maliciousness, negligence or just plain naivety.
+* For this reason Pull Requests that modify or locally fork C4 and COSS will be reverted, unless they are made to reflect upstream stable C4 and COSS.
+* These processes are falsifiable.
