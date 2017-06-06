@@ -2,7 +2,7 @@
 domain: ecip.ethereumclassic.org
 shortname: 21/TEMPECIP
 name: Template ECIP
-status: draft
+status: raw
 editor: Stewart Mackenzie <setori88@gmail.com>
 contributors:
   - Christopher Hitchens <chris@hitchslap.com>
