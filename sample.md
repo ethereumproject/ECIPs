@@ -1,12 +1,13 @@
 ---
 domain: ecip.ethereumclassic.org
 shortname: 22/SAMPECIP
-name: Sample ECIP
+name: Sample Ethereum Classic Improvement Process
 status: raw
 editor: Stewart Mackenzie <setori88@gmail.com>
 contributors:
   - Christopher Hitchens <chris@hitchslap.com>
 ---
+
 ## License
 
 Copyright (C) 2009-2017  Ethereum Classic Contributors
@@ -26,59 +27,32 @@ See the license file for more information.
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](http://tools.ietf.org/html/rfc2119).
 
 ### Abstract
-EIP stands for Ethereum Improvement Proposal. A EIP is a design document providing information to the Ethereum classic community, or describing a new feature for Ethereum or its processes or environment. The EIP should provide a concise technical specification of the feature and a rationale for the feature.  The EIP author is responsible for building consensus within the community and documenting dissenting opinions.
+An Ethereum Classic Improvement Proposal (ECIP) is a contract between multiple parties, it specifies and provides information on Public APIs, file formats, protocols and workflows to the community. It communicates enough technical information to achieve an initial implementation for the community to discuss and refine the implementation and specification further. It has a lifecycle and supports forking and merging of specifications, thus reducing petty bickering in the community. Entire supply chains should be formed with these composible ECIPs allowing market entry of competing vendors who selectively implement a few ECIP contracts and provide cheaper more efficient services.
 
 ### Motivation
-We intend EIPs to be the primary mechanisms for proposing new features, for collecting community input on an issue and for documenting the design decisions that have gone into Ethereum. Because the EIPs are maintained as text files in a versioned repository, their revision history is the historical record of the feature proposal.
+
+An ECIP is the primary mechanism for isolating, discussing and solving problems within the community. It does this by collecting input on an issue, validating there is indeed a problem faced by many in the community and proposes a solution which provids enough technical information to make an implementation. The community achieves *rough consensus through executing code*.
 
 ### Specification
-#### EIP Types
-There are three kinds of EIP:
+#### ECIP Lifecycle
 
-* A Standard Track EIP describes any change that affects most or all Ethereum implementations, such as a change to the [https://github.com/ethereum/yellowpaper Yellow Paper], the network protocol, a change in block or transaction validity rules, or any change or addition that affects the interoperability of applications using Ethereum. Furthermore Standard EIPs can be broken down into the following categories.
-** Consensus - Once PoS has been established it is expected that PoS protocol will have a separate specification.
-** Networking - Currently Networking discussion tracks in the [https://github.com/ethereum/devp2p devp2p repository].
+* All ECIPs MUST follow a lifecycle as defined in [2/COSS](2/COSS), with the exception of [1/C4](1/C4) and [2/COSS](2/COSS) (see `C4 and COSS Evolution`)
 
-* An Informational EIP describes a Ethereum design issue, or provides general guidelines or information to the Ethereum community, but does not propose a new feature. Informational EIPs do not necessarily represent Ethereum community consensus or a recommendation, so users and implementors are free to ignore Informational EIPs or follow their advice.
-* A Meta EIP describes a process surrounding Ethereum or proposes a change to (or an event in) a process. Process EIPs are like Standards Track EIPs but apply to areas other than the Ethereum protocol itself. They may propose an implementation, but not to Ethereum's codebase; they often require community consensus; unlike Informational EIPs, they are more than recommendations, and users are typically not free to ignore them. Examples include procedures, guidelines, changes to the decision-making process, and changes to the tools or environment used in Ethereum development. Any meta-EIP is also considered a Process EIP.
+#### ECIP Change Management
 
-#### EIP Work Flow
-The EIP repository Collaborators change the EIPs status. Please send all EIP-related email to the EIP Collaborators, which is listed under EIP Editors below. Also see EIP Editor Responsibilities & Workflow.
+* All ECIPs MUST follow the [1/C4](1/C4) change management, with the exception of [1/C4](1/C4) and [2/COSS](2/COSS) (see `C4 and COSS Evolution`)
 
-The EIP process begins with a new idea for Ethereum. It is highly recommended that a single EIP contain a single key proposal or new idea. Small enhancements or patches that don't affect consensus often don't need a EIP and can be injected into the Ethereum development workflow with a patch submission to the corresponding Ethereum issue tracker. The more focused the EIP, the more successful it tends to be. The EIP editor reserves the right to reject EIP proposals if they appear too unfocused or too broad. If in doubt, split your EIP into several well-focused ones.
+#### C4 and COSS Evolution
 
-Each EIP must have a champion -- someone who writes the EIP using the style and format described below, shepherds the discussions in the appropriate forums, and attempts to build community consensus around the idea. The EIP champion (a.k.a. Author) should first attempt to ascertain whether the idea is EIP-able. Posting to the  the [https://forum.ethereum.org/categories/protocol-and-client-discussion Protocol Discussion] forum or opening an [https://github.com/ethereum/EIP/issues Issue] is the best way to go about this.
-
-Vetting an idea publicly before going as far as writing a EIP is meant to save the potential author time. Asking the Ethereum community first if an idea is original helps prevent too much time being spent on something that is guaranteed to be rejected based on prior discussions (searching the Internet does not always do the trick). It also helps to make sure the idea is applicable to the entire community and not just the author. Just because an idea sounds good to the author does not mean it will work for most people in most areas where Ethereum is used.
-
-Once the champion has asked the Ethereum community as to whether an idea has any chance of acceptance, a draft EIP should be presented as a Pull Request. This gives the author a chance to flesh out the draft EIP to make properly formatted, of high quality, and to address initial concerns about the proposal.
-
-If the EIP collaborators approves, the EIP editor will assign the EIP a number, label it as Standards Track, Informational, or Process, give it status "Draft", and add it to the git repository. The EIP editor will not unreasonably deny an EIP. Reasons for denying EIP status include duplication of effort, being technically unsound, not providing proper motivation or addressing backwards compatibility, or not in keeping with the Ethereum philosophy.
-
-The EIP author may update the Draft as necessary in the git repository. Updates to drafts may also be submitted by the author as pull requests.
-
-Standards Track EIPs consist of three parts, a design document, implementation and finally if warranted an update to the [https://github.com/ethereum/yellowpaper formal specification]. The EIP should be reviewed and accepted before an implementation is begun, unless an implementation will aid people in studying the EIP. Standards Track EIPs must be implemented in at least two viable Ethereum clients before it can be considered Final.
-
-EIP authors are responsible for collecting community feedback on a EIP before submitting it for review. However, wherever possible, long open-ended discussions should be avoided. Strategies to keep the discussions efficient include: having the EIP author accept private comments in the early design phases, setting up a wiki page or git repository, etc. EIP authors should use their discretion here.
-
-For a EIP to be accepted it must meet certain minimum criteria. It must be a clear and complete description of the proposed enhancement. The enhancement must represent a net improvement. The proposed implementation, if applicable, must be solid and must not complicate the protocol unduly.
-
-Once a EIP has been accepted, the implementations must be completed. When the implementation is complete in at least two viable clients and accepted by the community, the status will be changed to "Final". An update to the [https://github.com/ethereum/yellowpaper formal specification] should accompany the "Final" status change.
-
-A EIP can also be assigned status "Deferred". The EIP author or editor can assign the EIP this status when no progress is being made on the EIP. Once a EIP is deferred, the EIP editor can re-assign it to draft status.
-
-A EIP can also be "Rejected". Perhaps after all is said and done it was not a good idea. It is still important to have a record of this fact.
-
-EIPs can also be superseded by a different EIP, rendering the original obsolete. This is intended for Informational EIPs, where version 2 of an API can replace version 1.
-
-The possible paths of the status of EIPs are as follows:
-
-<img src=./process.png>
-
-Some Informational and Process EIPs may also have a status of "Active" if they are never meant to be completed. E.g. EIP 1 (this EIP).
+* [1/C4](1/C4) and [2/COSS](2/COSS) are an implementation of the [Scientific Method](https://en.wikipedia.org/wiki/Scientific_method) that was empirically derived by many communities, hence changes to these specifications MUST first be listed as an issue on the upstream git [repository](https://github.com/unprotocols/rfc).
+* Discussion MUST take place there, not here.
+* Members in this community MUST be alerted to a discussion on upstream.
+* We SHALL adopt the stable version of `C4` and `COSS` specifications on upstream [repository](https://github.com/unprotocols/rfc) under the next available directory number in this repository and deprecate the previous `C4/COSS`.
+* For this reason Pull Requests that modify or locally fork `C4` and `COSS` will be reverted immediately, unless they are made to reflect upstream stable `C4` and `COSS`.
+* The [1/C4](1/C4) and [2/COSS](2/COSS) processes are falsifiable.
 
 #### What belongs in a successful EIP?
-Each EIP should have the following parts:
+Each ECIP should have the following parts:
 
 * Preamble -- RFC 822 style headers containing metadata about the EIP, including the EIP number, a short descriptive title (limited to a maximum of 44 characters), the names, and optionally the contact info for each author, etc.
 
@@ -100,7 +74,7 @@ Each EIP should have the following parts:
 EIPs should be written in markdown format. Image files should be included in a subdirectory for that EIP.
 
 #### EIP Header Preamble
-Each EIP must begin with an RFC 822 style header preamble. The headers must appear in the following order. Headers marked with "*" are optional and are described below. All other headers are required.
+Each EIP must begin with an RFC 822 style header preamble. The headers must appear in the following order. Headers marked with "\*" are optional and are described below. All other headers are required.
 
       EIP: <EIP number>
       Title: <EIP title>
@@ -179,7 +153,16 @@ For Ethereum implementers, EIPs are a convenient way to track the progress of th
 EIPs are intend to replace the venerable etherpads which described the initial PoC (Proof of Concept) and strike a balance between ease of accessibility and trackablity.
 
 ### Implementation
-Fork the [EIP repo](https://github.com/ethereumproject/EIPs). Write an EIP using the [EIP markdown template](./EIP-0000.md.template) and initiate a pull request.
+* Read and understand [1/C4](1/C4).
+* Read and understand [2/COSS](2/COSS).
+* Fork github.com/ethereumproject/ECIPs
+* `git clone github.com/<your-fork>/ECIPs` repo
+* `mkdir <next_available_directory_number>`
+* `cp template.md <next_available_directory_number>/README.md`
+* Edit the `shortname`, `name`, `status`.
+* Edit the document's contents using the Markdown syntax.
+* Don't forget to add your new ECIP in the `SUMMARY.md` document under the `raw` section.
+* Make a Pull Request.
 
 ### History
 This document was derived heavily from [https://github.com/bitcoin/bips Bitcoin's BIP-0001] written by Amir Taaki which in turn was derived from [https://www.python.org/dev/peps/ Python's PEP-0001]. In many places text was simply copied and modified. Although the PEP-0001 text was written by Barry Warsaw, Jeremy Hylton, and David Goodger, they are not responsible for its use in the Ethereum Improvement Process, and should not be bothered with technical questions specific to Ethereum or the EIP. Please direct all comments to the EIP editors.
