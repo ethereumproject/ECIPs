@@ -27,7 +27,7 @@ See the license file for more information.
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](http://tools.ietf.org/html/rfc2119).
 
 ### Abstract
-An Ethereum Classic Improvement Proposal (ECIP) is a contract between multiple parties, it specifies and provides information on Public APIs, file formats, protocols and workflows to the community. It communicates enough technical information to achieve an initial implementation for the community to discuss and refine the implementation and specification further. It has a lifecycle and supports forking and merging of specifications, thus reducing petty bickering in the community. Entire supply chains should be described with these composible ECIPs allowing market entry of competing vendors who selectively implement a few ECIP contracts and provide cheaper more efficient services and products.
+An Ethereum Classic Improvement Proposal (ECIP) is a contract between multiple parties, it specifies and provides information on Public APIs, file formats, protocols and workflows to the community. It communicates enough technical information to achieve an initial implementation for the community to discuss and refine the implementation and specification further. It has a lifecycle and supports forking and merging of specifications, thus reducing petty bickering in the community. Entire supply chains should be described with these composable ECIPs allowing market entry of competing vendors who selectively implement a few ECIP contracts and provide cheaper more efficient services and products.
 
 ### Motivation
 
@@ -52,13 +52,13 @@ An ECIP is the primary mechanism for isolating, discussing and solving problems 
 * The [1/C4](1/C4) and [2/COSS](2/COSS) processes are falsifiable.
 
 #### What belongs in a successful ECIP?
-Each ECIP should have the following parts:
+Each ECIP SHOULD have the following parts:
 
 * Preamble -- RFC 822 style headers containing the `domain`, `shortname`, `name`, `status`, `editor` and `contributors` of the ECIP.
 
 * Abstract -- a short (~200 word) description of the technical issue being addressed.
 
-* Motivation -- The motivation is critical for ECIPs that want to change the Ethereum protocol. It should clearly explain why the existing protocol specification is inadequate to address the problem the ECIP solves. ECIP submissions without sufficient motivation may be moved to the deleted section outright.
+* Motivation -- The motivation is critical for ECIPs that want to change the Ethereum protocol. It should clearly explain why the existing protocol specification is inadequate to address the problem. ECIP submissions without sufficient motivation may be moved to the deleted section outright.
 
 * Specification -- The technical specification should describe the syntax and semantics of the solution to the problem. The specification should be detailed enough to allow competing, interoperable implementations for any of the current Ethereum Classic platforms.
 
@@ -66,12 +66,12 @@ Each ECIP should have the following parts:
 
   * The rationale should provide evidence of rough consensus within the community and discuss important objections or concerns raised during discussion.
 
-* Backwards Compatibility -- Only ECIPs that are in `raw` or `draft` status may make backward incompatible changes. Once an ECIP reaches a `stable` status then backward incompatible changes are not acceptable unless there is strong overriding consensus on the matter. Hence it is encouraged to experiment and really understand the problem while the ECIP is in `raw` or `draft` stages. Please read [2/COSS](2/COSS) for more details.
+* Backwards Compatibility -- Only ECIPs that are in `raw` or `draft` status may make backward incompatible changes. Once an ECIP reaches a `stable` status then backward incompatible changes are not acceptable unless there is strong overriding consensus on the matter. Hence it is encouraged to experiment and really understand the problem while the ECIP is in `raw` or `draft` stages. Please read [2/COSS](2/COSS) for more details and the section `2.6. Evolution of Public Contracts` of [1/C4](1/C4).
 
-* Implementations -- An ECIP that has no implementation is a `raw` ECIP. As soon as there is a minimal implementation proving the concept then the ECIP is upgraded to `draft` status. Once enough experimentation has taken place and the specification feels sturdy enough that 3rd parties start to implement the specification then the ECIP becomes `stable`. At this point only cosmetic changes to the ECIP are accepted and public APIs are not changed. Please read [2/COSS](2/COSS) for more details.
+* Implementations -- An ECIP that has no implementation is a `raw` ECIP. As soon as there is a minimal implementation proving the concept then the ECIP is upgraded to `draft` status. Once enough experimentation has taken place and the specification feels sturdy enough that 3rd parties start to implement the specification then the ECIP becomes `stable`. At this point only cosmetic changes to the ECIP are accepted and public APIs are not changed. Please read [2/COSS](2/COSS) for more details and the section `2.6. Evolution of Public Contracts` of [1/C4](1/C4).
 
 #### ECIP Formats and Templates
-ECIPs should be written in markdown format in a file name `README.md`. Image files should be included in the same directory as the ECIP.
+ECIPs should be written in markdown format in a file named `README.md`. Image files should be included in the same directory as the ECIP.
 
 #### ECIP Header Preamble
 Each ECIP must begin with an RFC 822 style header preamble. The headers must appear in the following order. All headers are required except the `contributors`. The three dashes demarkate YAML.
@@ -91,7 +91,8 @@ contributors:
 
 The `domain` header details the domain this rfc applies to.
 
-The `shortname` is defined by [2/COSS](2/COSS) and should be constructed in such a way the brain can easily pattern match. The integer is the next available directory number and the shortname is a simplified version of the `name`. It should be easy to type as it'll be used regularly in discussion forums. Indeed competing specifications such as `4/FEE` and `5/FEE` might be discussed at length, each containing different meanings.
+The `shortname` is defined by [2/COSS](2/COSS) and should be constructed in such a way the brain can easily pattern match. The integer part of the `shortname` is the next available directory number and the shortname is a simplified version of the `name`. It should be easy to type as it'll be used regularly in discussion forums. Indeed competing specifications such as `4/FEE` and `5/FEE` might be discussed at length, each containing different meanings.
+For example: the `monetary policy` ECIP previously named `ECIP-1017` now has the name [12/MONPOL](12/MONPOL).
 
 The `name` is the full name of the ECIP.
 
@@ -112,46 +113,17 @@ The `contributors` header are people who have collaborated on the ECIP.
 If there are multiple contributors, each should be on a separate line using markdown dash lists.
 
 #### Auxiliary Files
-ECIPs may include auxiliary files such as diagrams. Such files must be named <number>-<shortname>-Y.ext, where <number> is the numbered of the directory the ECIP occupies, the <shortname> is the shortname without the "2/" and the "Y" is a serial number (starting at 1), and "ext" is replaced by the actual file extension (e.g. "png").
+ECIPs may include auxiliary files such as diagrams. Such files must be named <number>-<shortname>-<Y>.<ext>, where "<number>" is the number of the directory the ECIP occupies, the "<shortname>" is the shortname without the integer and slash and the "<Y>" is a serial number (starting at 1), and "<ext>" is replaced by the actual file extension (e.g. "png").
 
-For example 2-COSS-4.png refers to a png image located in the `2` directory which is ECIP `2/COSS`.
+For example 2-COSS-4.png refers to a png image located in the directory named `2` which is ECIP `2/COSS`, and it is the 4th image in the directory.
 
 #### Transferring ECIP Ownership
-It occasionally becomes necessary to transfer ownership of ECIPs to a new champion. In general, we'd like to retain the original author as a co-author of the transferred ECIP, but that's really up to the original author. A good reason to transfer ownership is because the original author no longer has the time or interest in updating it or following through with the ECIP process, or has fallen off the face of the 'net (i.e. is unreachable or not responding to email). A bad reason to transfer ownership is because you don't agree with the direction of the ECIP. We try to build consensus around a ECIP, but if that's not possible, you can always submit a competing ECIP.
+It occasionally becomes necessary to transfer ownership of ECIPs to a new champion. In general, we'd like to retain the original editor as a co-editor of the transferred ECIP, but that's really up to the original editor. A good reason to transfer ownership is because the original editor no longer has the time or interest in updating or following the ECIP process, or has fallen off the face of the 'net (i.e. is unreachable or not responding to email). A bad reason to transfer ownership is because one doesn't agree with the direction of the ECIP. We try to build rough consensus around a ECIP, but if that's not possible, you can always submit a competing ECIP by forking the ECIP, selecting the next available directory number and using the same shortname. It's *preferred* that the community work together on an ECIP and not just fork haphazardly. The key here is to put down your ego and understand the problems of the community, not just your narrow viewpoint.
 
-If you are interested in assuming ownership of an ECIP, send a message asking to take over, addressed to both the original author and the ECIP editor. If the original author doesn't respond to email in a timely manner, the ECIP editor will make a unilateral decision (it's not like such decisions can't be reversed :).
-
-#### ECIP Editors
-The current ECIP editors are
-  * All volunteers in the Ethereum Classic Project github organization
-
-#### ECIP Editor Responsibilities & Workflow
-For each new ECIP that comes in, an editor does the following:
-
-* Read the ECIP to check if it is ready: sound and complete. The ideas must make technical sense, even if they don't seem likely to be accepted.
-* The title should accurately describe the content.
-* Edit the ECIP for language (spelling, grammar, sentence structure, etc.), markup (for reST EWIPs), code style
-
-If the ECIP isn't ready, the editor will send it back to the author for revision, with specific instructions.
-
-Once the EIP is ready for the repository, the EIP editor will:
-
-* Assign a EIP number (almost always just the next available number)
-
-* Accept the corresponding pull request
-
-* List the EIP in [[README.md]]
-
-* Send email back to the EIP author with next step.
-
-Many EIPs are written and maintained by developers with write access to the Ethereum codebase. The EIP editors monitor EIP changes, and correct any structure, grammar, spelling, or markup mistakes we see.
-
-The editors don't pass judgment on EIPs. We merely do the administrative & editorial part. Except for times like this, there's relatively low volume.
+If you are interested in assuming ownership of an ECIP, send a message, addressed to the ECIP editor, asking to take over. If the original editor doesn't respond to email in a timely manner, the willing ECIP editor may make a unilateral decision (such decisions can be reversed). Be kind and mature about this process.
 
 ### Rationale
-For Ethereum implementers, EIPs are a convenient way to track the progress of their implementation. Ideally each implementation maintainer would list the EIPs that they have implemented. This will give end users a convenient way to know the current status of a given implementation or library.
-
-EIPs are intend to replace the venerable etherpads which described the initial PoC (Proof of Concept) and strike a balance between ease of accessibility and trackablity.
+ECIPs are a convenient way to track the progress of their implementations. Ideally each set of implementation maintainers would list the ECIP composition that they have implemented. This will give end users a convenient way to know the current status of a given implementation or library.
 
 ### Implementation
 * Read and understand [1/C4](1/C4).
@@ -167,4 +139,4 @@ EIPs are intend to replace the venerable etherpads which described the initial P
 * Make a Pull Request.
 
 ### History
-This document was derived heavily from [https://github.com/bitcoin/bips Bitcoin's BIP-0001] written by Amir Taaki which in turn was derived from [https://www.python.org/dev/peps/ Python's PEP-0001]. In many places text was simply copied and modified. Although the PEP-0001 text was written by Barry Warsaw, Jeremy Hylton, and David Goodger, they are not responsible for its use in the Ethereum Improvement Process, and should not be bothered with technical questions specific to Ethereum or the EIP. Please direct all comments to the EIP editors.
+This document was derived heavily from [https://github.com/bitcoin/bips Bitcoin's BIP-0001] written by Amir Taaki which in turn was derived from [https://www.python.org/dev/peps/ Python's PEP-0001]. In many places text was simply copied and modified. Although the PEP-0001 text was written by Barry Warsaw, Jeremy Hylton, and David Goodger, they are not responsible for its use in the Ethereum Improvement Process, and should not be bothered with technical questions specific to Ethereum or the EIP. Since the DAO hard fork the Ethereum Classic developers have forked this EIP process and modified it such that it can describe supply chains in the form of contracts. This process is derived from the ZeroMQ community.
