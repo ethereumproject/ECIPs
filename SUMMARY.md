@@ -1,5 +1,6 @@
 # ECIPs
 
+* [Back to Ethereum Classic](https://ethereumclassic.github.io/)
 * [ECIP Introduction](README.md)
 * Raw
   * [16/EVMJSON](16/README.md)

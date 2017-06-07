@@ -1,8 +1,6 @@
 The Official Ethereum Classic Improvement Process Project
 ==========================================================
 
-[Back to ethereumclassic.org](https://ethereumclassic.github.io/)
-
 We collect specifications for APIs, file formats, protocols and workflows from all parties that collaborate on Ethereum Classic. This project enables harmony between multiple collaborating parties and is driven by _*rough consensus through working code*_.
 
 You can start contributing by sending a pull request to https://github.com/ethereumproject/ecips on GitHub.
