@@ -104,7 +104,7 @@ Each ECIP must begin with an RFC 822 style header preamble. The headers must app
   ECIP: <ECIP number, or "?" before being assigned>
   Layer: <Consensus (soft fork) | Consensus (hard fork) | Peer Services | API/RPC | Applications>
   Title: <ECIP title; maximum 44 characters>
-  Author: <list of authors' real names and email addrs>
+  Author: <list of authors real names and email addrs>
   Discussions-To: <email address>
   Comments-Summary: <summary tone>
   Comments-URI: <links to wiki page for comments>
