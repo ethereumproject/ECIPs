@@ -45,7 +45,9 @@ Currently user accounts are represented in a manner that allows for any third pa
 
 ### Stealth Address
 
-see: Cryptonote whitepaper Figure 4
+![image alt text](ECIP-1035-Stealth.png)
+
+Cryptonote whitepaper Figure 4
 
 #### The Alice and Bob
 
