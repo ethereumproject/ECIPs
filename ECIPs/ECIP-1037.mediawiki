@@ -1,0 +1,168 @@
+<pre>
+  ECIP: 1037
+  Layer: Applications
+  Title: URI Scheme
+  Author: Cody Burns <dontpanic@codywburns.com>
+  Comments-Summary: No comments yet
+  Status: Draft
+  Type: Standards Track
+  Created: 20170909
+</pre>
+
+This ECIP is based off BIP 0021 can be referenced at https://github.com/bitcoin/bips/blob/master/bip-0021.mediawiki
+
+==Abstract==
+This ECIP proposes a URI scheme for interacting with ethereum contract and accounts in a standard format.
+
+==Motivation==
+The purpose of this URI scheme is to enable users to easily make payments and interact with smart contracts by simply clicking links on webpages or scanning QR Codes.
+
+==Specification==
+
+=== General rules for handling (important!) ===
+
+ETC clients MUST NOT act on URIs without getting the user's authorization.
+They SHOULD require the user to manually approve each payment individually, though in some cases they MAY allow the user to automatically make this decision.
+ETC clients SHOULD include the message field describing the actions of the code.
+
+=== Operating system integration ===
+Graphical ethereums SHOULD register themselves as the handler for the "ethereum:" URI scheme by default, if no other handler is already registered. If there is already a registered handler, they MAY prompt the user to change it once when they first run the client.
+
+=== General Format ===
+
+Ethereum URIs follow the general format for URIs as set forth in RFC 3986. The path component consists of a bitcoin address, and the query component provides additional payment options.
+
+Elements of the query component may contain characters outside the valid range. These must first be encoded according to UTF-8, and then each octet of the corresponding UTF-8 sequence must be percent-encoded as described in RFC 3986.
+
+=== ABNF grammar ===
+
+ ethereumurn     = "ethereum:" ethereumaddress [ "?" ethereumparams ]
+ ethereumaddress = *hexdig
+ ethereumchainid = *hexdig
+ ethereumparams  = ethereumparam [ "&" ethereumparams ]
+ ethereumparam   = [ amountparam / gasparam / codeparam / labelparam / messageparam / otherparam / reqparam ]
+ amountparam     = "amount=" *digit [ "." *digit ]
+ gasparam        = "gas=" *digit
+ codeparam       = "code=" *hexdig
+ labelparam      = "label=" *qchar
+ messageparam    = "message=" *qchar
+ otherparam      = qchar *qchar [ "=" *qchar ]
+ reqparam        = "req-" qchar *qchar [ "=" *qchar ]
+
+Here, "qchar" corresponds to valid characters of an RFC 3986 URI query component, excluding the "=" and "&" characters, which this ECIP takes as separators.
+
+The scheme component ("ethereum:") is case-insensitive, and implementations must accept any combination of uppercase and lowercase letters. The rest of the URI is case-sensitive, including the query parameter keys.
+
+=== Query Keys ===
+
+
+*address: ethereum account or contract address in hexidecimal 
+*chainid: eip 155 compliant chainid, used for sanity check 
+*amount = amount of ether to transfer, denominated in ETC
+*gas = amount of gas transaction is not to exceed
+*code = byte code data for transaction
+*label: Label for that address (e.g. name of receiver)
+*message: message that describes the transaction to the user ([[#Examples|see examples below]])
+*(others): optional, for future extensions
+
+==== Transfer amount/size ====
+
+If an amount is provided, it MUST be specified in decimal ETC.
+All amounts MUST contain no commas and use a period (.) as the separating character to separate whole numbers and decimal fractions.
+I.e. amount=50.00 or amount=50 is treated as 50 ETC, and amount=50,000.00 is invalid.
+
+ETC clients MAY display the amount in any format that is not intended to deceive the user.
+They SHOULD choose a format that is foremost least confusing, and only after that most reasonable given the amount requested.
+For example, so long as the majority of users work in ETC units, values should always be displayed in ETC by default, even if wei would otherwise be a more logical interpretation of the amount.
+== Rationale ==
+
+===Payment identifiers, not person identifiers===
+Current best practices are that a unique address should be used for every transaction.
+Therefore, a URI scheme should not represent an exchange of personal information, but a one-time payment.
+
+===Accessibility (URI scheme name)===
+Should someone from the outside happen to see such a URI, the URI scheme name already gives a description.
+A quick search should then do the rest to help them find the resources needed to make their payment.
+Other proposed names sound much more cryptic; the chance that someone googles that out of curiosity are much slimmer.
+Also, very likely, what he will find are mostly technical specifications - not the best introduction to ETC.
+
+===Contract Code===
+
+It is not the intent of this ECIP to define every possible contract code that could be implimented.
+Higher level functionality would be provided by the site creating the URI qr code and, for lack of a better term,
+black box it to the application scanning the code. As generating qr-codes is trivial on an application compared to 
+the hazard of unlocking a private key, an application should be able to produce a URI that is functionally similar 
+to a standard transaction without the account specific details.
+
+Best practices in function codes shold be adhered to and this ECIP should remain forward compatable.
+It is recommended that dApps should make effort to include in the message what is being accomplished in the code.
+
+
+==Forward compatibility==
+Variables which are prefixed with a req- are considered required.  If a client does not implement any variables which are prefixed with req-, it MUST consider the entire URI invalid.  Any other variables which are not implemented, but which are not prefixed with a req-, can be safely ignored.
+
+==Backward compatibility==
+As this ECIP is written, several clients already implement a ethereum: URI scheme similar to this one, however usually without the additional "req-" prefix requirement.  Thus, it is recommended that additional variables prefixed with req- not be used in a mission-critical way until a grace period of 6 months from the finalization of this ECIP has passed in order to allow client developers to release new versions, and users of old clients to upgrade.
+
+== Appendix ==
+
+=== Simpler syntax ===
+
+This section is non-normative and does not cover all possible syntax.
+Please see the BNF grammar above for the normative syntax.
+
+[foo] means optional, &lt;bar&gt; are placeholders
+
+ <nowiki>ethereum:<address>&chain=<chainid>[?amount=<amount>][?gas=<startGas>][?code=<data>][?label=<label>][?message=<message>]</nowiki>
+
+=== Examples ===
+
+Just the address:
+ ethereum:0xCe5ED529977b08f87CBc207ebC216859820461eE&chain=61
+
+Address with name:
+ ethereum:0xCe5ED529977b08f87CBc207ebC216859820461eE&chain=61?label=DontPanic
+
+Request 20.30 ETC to "DontPanic":
+ ethereum:0xCe5ED529977b08f87CBc207ebC216859820461eE&chain=61?amount=20.3&label=DontPanic
+
+Request 42.30 ETC to "DontPanic" with gas:
+ ethereum:0xCe5ED529977b08f87CBc207ebC216859820461eE&chain=61?amount=20.3&gas=21000&label=DontPanic
+
+Request 50 ETC with message:
+ ethereum:0xCe5ED529977b08f87CBc207ebC216859820461eE&chain=61?amount=50&label=DontPanic&message=Purchase%20token%20for%20project%20xyz%20ICO
+
+Request 50 ETC with message:
+ ethereum:0xCe5ED529977b08f87CBc207ebC216859820461eE&chain=61?amount=50&label=DontPanic&message=Purchase%20token%20for%20project%20xyz%20ICO
+
+Request a function call in a contract:
+ ethereum:0xCe5ED529977b08f87CBc207ebC216859820461eE&chain=61?amount=50&code=0x2066726f6d204a656666204761727a696b20666f7220746f6b656e206d696e74
+
+Some future version that has variables which are (currently) not understood and required and thus invalid:
+ ethereum:0xCe5ED529977b08f87CBc207ebC216859820461eE&chain=61?req-somethingyoudontunderstand=50&req-somethingelseyoudontget=999
+
+Some future version that has variables which are (currently) not understood but not required and thus valid:
+ ethereum:0xCe5ED529977b08f87CBc207ebC216859820461eE&chain=61?somethingyoudontunderstand=50&somethingelseyoudontget=999
+
+Characters must be URI encoded properly.
+
+== Reference Implementations ==
+
+=== Libraries ===
+
+=== References ===
+
+BIP 21: Bitcoin URI Scheme
+https://github.com/bitcoin/bips/blob/master/bip-0021.mediawik
+
+ERC: Standard URI scheme with metadata, value and byte code
+https://github.com/ethereum/EIPs/issues/67
+
+RFC 3986
+https://www.ietf.org/rfc/rfc3986.txt
+
+EIP 155: Simple replay attack protection
+https://github.com/ethereum/EIPs/blob/master/EIPS/eip-155.md
+
+Ethereum Yellow Paper
+http://yellowpaper.io/
