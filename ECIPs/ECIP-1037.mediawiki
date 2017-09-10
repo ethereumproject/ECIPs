@@ -38,7 +38,7 @@ Elements of the query component may contain characters outside the valid range. 
 
  ethereumurn     = "ethereum:" ethereumaddress [ "?" ethereumparams ]
  ethereumaddress = *hexdig
- ethereumchainid = *hexdig
+ ethereumid = *hexdig
  ethereumparams  = ethereumparam [ "&" ethereumparams ]
  ethereumparam   = [ amountparam / gasparam / codeparam / labelparam / messageparam / otherparam / reqparam ]
  amountparam     = "amount=" *digit [ "." *digit ]
@@ -57,7 +57,7 @@ The scheme component ("ethereum:") is case-insensitive, and implementations must
 
 
 *address: ethereum account or contract address in hexidecimal 
-*chainid: eip 155 compliant chainid, used for sanity check 
+*id: eip 155 compliant chainid, used for sanity check 
 *amount = amount of ether to transfer, denominated in ETC
 *gas = amount of gas transaction is not to exceed
 *code = byte code data for transaction
@@ -103,7 +103,7 @@ The information that will be passed in the byte code field would then be:
 
 The entire URi could be:
           
- ethereum:0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef&chain=61&code=0x023b88685d
+ ethereum:0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef&id=61&code=0x023b88685d
 
 == Rationale ==
 
@@ -144,33 +144,33 @@ Please see the BNF grammar above for the normative syntax.
 
 [foo] means optional, &lt;bar&gt; are placeholders
 
- <nowiki>ethereum:<address>&chain=<chainid>[?amount=<amount>][?gas=<startGas>][?code=<data>][?label=<label>][?message=<message>]</nowiki>
+ <nowiki>ethereum:<address>&id=<chainid>[?amount=<amount>][?gas=<startGas>][?code=<data>][?label=<label>][?message=<message>]</nowiki>
 
 === Examples ===
 
 Just the address:
- ethereum:0xCe5ED529977b08f87CBc207ebC216859820461eE&chain=61
+ ethereum:0xCe5ED529977b08f87CBc207ebC216859820461eE&id=61
 
 Address with name:
- ethereum:0xCe5ED529977b08f87CBc207ebC216859820461eE&chain=61?label=DontPanic
+ ethereum:0xCe5ED529977b08f87CBc207ebC216859820461eE&id=61?label=DontPanic
 
 Request 20.30 ETC to "DontPanic":
- ethereum:0xCe5ED529977b08f87CBc207ebC216859820461eE&chain=61?amount=20.3&label=DontPanic
+ ethereum:0xCe5ED529977b08f87CBc207ebC216859820461eE&id=61?amount=20.3&label=DontPanic
 
 Request 42.30 ETC to "DontPanic" with gas:
- ethereum:0xCe5ED529977b08f87CBc207ebC216859820461eE&chain=61?amount=20.3&gas=21000&label=DontPanic
+ ethereum:0xCe5ED529977b08f87CBc207ebC216859820461eE&id=61?amount=20.3&gas=21000&label=DontPanic
 
 Request 50 ETC with message:
- ethereum:0xCe5ED529977b08f87CBc207ebC216859820461eE&chain=61?amount=50&label=DontPanic&message=Purchase%20token%20for%20project%20xyz%20ICO
+ ethereum:0xCe5ED529977b08f87CBc207ebC216859820461eE&id=61?amount=50&label=DontPanic&message=Purchase%20token%20for%20project%20xyz%20ICO
 
 Request a function call in a contract:
- ethereum:0xCe5ED529977b08f87CBc207ebC216859820461eE&chain=61?amount=50&code=0x2066726f6d204a656666204761727a696b20666f7220746f6b656e206d696e74
+ ethereum:0xCe5ED529977b08f87CBc207ebC216859820461eE&id=61?amount=50&code=0x2066726f6d204a656666204761727a696b20666f7220746f6b656e206d696e74
 
 Some future version that has variables which are (currently) not understood and required and thus invalid:
- ethereum:0xCe5ED529977b08f87CBc207ebC216859820461eE&chain=61?req-somethingyoudontunderstand=50&req-somethingelseyoudontget=999
+ ethereum:0xCe5ED529977b08f87CBc207ebC216859820461eE&id=61?req-somethingyoudontunderstand=50&req-somethingelseyoudontget=999
 
 Some future version that has variables which are (currently) not understood but not required and thus valid:
- ethereum:0xCe5ED529977b08f87CBc207ebC216859820461eE&chain=61?somethingyoudontunderstand=50&somethingelseyoudontget=999
+ ethereum:0xCe5ED529977b08f87CBc207ebC216859820461eE&id=61?somethingyoudontunderstand=50&somethingelseyoudontget=999
 
 Characters must be URI encoded properly.
 
