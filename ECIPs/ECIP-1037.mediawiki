@@ -99,11 +99,11 @@ which yeilds:
 
 The information that will be passed in the byte code field would then be:
  
- code=0x023b88685d
+ code=0x023b8868
 
 The entire URi could be:
           
- ethereum:0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef&id=61&code=0x023b88685d
+ ethereum:0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef&id=61&code=0x023b8868
 
 
 Bytecode specifications can be found in their respective documentation.
