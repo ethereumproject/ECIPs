@@ -38,7 +38,7 @@ Elements of the query component may contain characters outside the valid range. 
 
  ethereumurn     = "ethereum:" ethereumaddress [ "?" ethereumparams ]
  ethereumaddress = *hexdig
- ethereumid = *hexdig
+ ethereumid = *digit
  ethereumparams  = ethereumparam [ "&" ethereumparams ]
  ethereumparam   = [ amountparam / gasparam / codeparam / labelparam / messageparam / otherparam / reqparam ]
  amountparam     = "amount=" *digit [ "." *digit ]
