@@ -105,6 +105,9 @@ The entire URi could be:
           
  ethereum:0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef&id=61&code=0x023b88685d
 
+
+Bytecode specifications can be found in their respective documentation.
+
 == Rationale ==
 
 ===Payment identifiers, not person identifiers===
@@ -191,6 +194,9 @@ https://www.ietf.org/rfc/rfc3986.txt
 
 EIP 155: Simple replay attack protection
 https://github.com/ethereum/EIPs/blob/master/EIPS/eip-155.md
+
+Solidity in depth
+http://solidity.readthedocs.io/en/develop/abi-spec.html#examples
 
 Ethereum Yellow Paper
 http://yellowpaper.io/
