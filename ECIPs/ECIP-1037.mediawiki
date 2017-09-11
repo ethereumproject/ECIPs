@@ -36,13 +36,15 @@ Elements of the query component may contain characters outside the valid range. 
 
 === ABNF grammar ===
 
- ethereumurn     = "ethereum:" ethereumaddress [ "?" ethereumparams ]
+ ethereumurn     = "ethereum:" ethereumaddress & ethereumchainid [ "?" ethereumparams ]
  ethereumaddress = *hexdig
- ethereumid = *digit
+ ethereumchainid = "id=" *digit
  ethereumparams  = ethereumparam [ "&" ethereumparams ]
- ethereumparam   = [ amountparam / gasparam / codeparam / labelparam / messageparam / otherparam / reqparam ]
+ ethereumparam   = [ amountparam / gasparam / gaslimitparm / nonceparam / codeparam / labelparam / messageparam / otherparam / reqparam]
  amountparam     = "amount=" *digit [ "." *digit ]
  gasparam        = "gas=" *digit
+ gaslimitparm    = "glmt=" *digit
+ nonceparam      = "n=" *digit
  codeparam       = "code=" *hexdig
  labelparam      = "label=" *qchar
  messageparam    = "message=" *qchar
@@ -55,16 +57,39 @@ The scheme component ("ethereum:") is case-insensitive, and implementations must
 
 === Query Keys ===
 
-
 *address: ethereum account or contract address in hexidecimal 
 *id: eip 155 compliant chainid, used for sanity check 
 *amount = amount of ether to transfer, denominated in ETC
-*gas = amount of gas transaction is not to exceed
+*gas = gas price
+*gaslmt = amount of gas transaction is not to exceed
+*nonce = account nonce 
 *code = byte code data for transaction
 *label: Label for that address (e.g. name of receiver)
 *message: message that describes the transaction to the user ([[#Examples|see examples below]])
 *(others): optional, for future extensions
 
+
+=== EIP 155 Transaction === 
+
+The intent of the uri is to pass all information nessecarry for forming a raw transaction to another device or service for signing. 
+
+A raw transaction should map the uri functions as follows for RLP encoding:
+
+ var rawTX = {
+        nonce = nonceparam,
+        gasprice =  gasparam,
+        gaslimit = gaslimitparam,
+        to =  ethereumaddress,
+        value = amountparam * 10**18,
+        data = codeparam,
+        v = ethereumchainid,
+        r = '',
+        s = ''
+        }
+
+The parameters labelparam, messageparam, otherparam, and reqparam are not used in transaction signing and can be optionally displayed to the user to pass additional information about the transaction. 
+
+        
 ==== Transfer amount/size ====
 
 If an amount is provided, it MUST be specified in decimal ETC.
@@ -74,6 +99,41 @@ I.e. amount=50.00 or amount=50 is treated as 50 ETC, and amount=50,000.00 is inv
 ETC clients MAY display the amount in any format that is not intended to deceive the user.
 They SHOULD choose a format that is foremost least confusing, and only after that most reasonable given the amount requested.
 For example, so long as the majority of users work in ETC units, values should always be displayed in ETC by default, even if wei would otherwise be a more logical interpretation of the amount.
+
+=== ENS addresses ===
+
+The Ethereum Name Service is a protocol and ABI definition that provides flexible resolution of short, human-readable names to service and resource identifiers. This permits users and developers to refer to human-readable and easy to remember names, and permits those names to be updated as necessary when the underlying resource (contract, content-addressed data, etc) changes.
+
+ENS names must conform to the following syntax:
+
+ <domain> ::= <label> | <domain> "." <label>
+ <label> ::= any valid string label per [UTS46](http://unicode.org/reports/tr46/)
+
+For the specification of the URI, <label> resolves into the following ethereumchainid:
+
+{|  class="wikitable" style="text-align: left;"
+|-
+! scope="col" width="width:20em;" | TLD
+! scope="col" width="width:20em;" | Chain_ID
+! scope="col" width="width:20em;" | Chain
+|-
+|.eth
+|1
+|Ethereum mainnet
+|-
+|.exp
+|2
+|Expanse mainnet
+|-
+|.rsk
+|30
+|Rootstock mainnet
+|-
+|.etc
+|61
+|Ethereum Classic mainnet
+|-
+|}
 
 === Bytecode Transactions ===
 
@@ -103,7 +163,7 @@ The information that will be passed in the byte code field would then be:
 
 The entire URi could be:
           
- ethereum:0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef&id=61&code=0x023b8868
+ ethereum:0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef&id=61?code=0x023b8868
 
 
 Bytecode specifications can be found in their respective documentation.
@@ -112,7 +172,7 @@ Bytecode specifications can be found in their respective documentation.
 
 ===Payment identifiers, not person identifiers===
 Current best practices are that a unique address should be used for every transaction.
-Therefore, a URI scheme should not represent an exchange of personal information, but a one-time payment.
+Therefore, a URI scheme should not represent an exchange of personal information, but a one-time payment or function call.
 
 ===Accessibility (URI scheme name)===
 Should someone from the outside happen to see such a URI, the URI scheme name already gives a description.
@@ -147,7 +207,7 @@ Please see the BNF grammar above for the normative syntax.
 
 [foo] means optional, &lt;bar&gt; are placeholders
 
- <nowiki>ethereum:<address>&id=<chainid>[?amount=<amount>][?gas=<startGas>][?code=<data>][?label=<label>][?message=<message>]</nowiki>
+ <nowiki>ethereum:<address>&id=<chainid>[?amount=<amount>][&gas=<startGas>][&glmt=<gaslimit>][&n=<nonce>][&code=<data>][&label=<label>][&message=<message>]</nowiki>
 
 === Examples ===
 
@@ -194,6 +254,9 @@ https://www.ietf.org/rfc/rfc3986.txt
 
 EIP 155: Simple replay attack protection
 https://github.com/ethereum/EIPs/blob/master/EIPS/eip-155.md
+
+EIP 137: Ethereum Domain Name Service - Specification
+https://github.com/ethereum/EIPs/blob/master/EIPS/eip-137.md
 
 Solidity in depth
 http://solidity.readthedocs.io/en/develop/abi-spec.html#examples
