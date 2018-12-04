@@ -1,7 +1,7 @@
 ### Title
 
     ECIP: TBD
-    Title: <ECIP title>
+    Title: Status Codes
     Author: Brooklyn Zelenka [@expede](https://github.com/expede), [Boris Mann](https://github.com/bmann)
     Discussions-To: https://fission.codes/blockchain/ethclassic
     Status: Draft
